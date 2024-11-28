@@ -5,17 +5,17 @@ import { useState } from 'react'
 // import { IoMdSend } from 'react-icons/io'
 
 interface InputProps {
-  onSubmit: (message: string) => void;
+//   onSubmit: (message: string) => void;
 }
 
-const Input = ({ onSubmit }: InputProps) => {
+const Input = ({ }: InputProps) => {
   const [message, setMessage] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (message.trim() === '') return;
     
-    onSubmit(message);
+    // onSubmit(message);
     setMessage('');
   };
 
