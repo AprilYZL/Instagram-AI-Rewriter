@@ -4,7 +4,8 @@ import Input from './components/input';
 export default function Home() {
   const handleSubmit = (message: string) => {
     // Handle the message submission here
-    console.log(message);
+    console.log(message, 'test');
+
   };
 
   return (
