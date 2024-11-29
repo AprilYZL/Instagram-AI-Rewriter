@@ -9,8 +9,7 @@ const fetchData = async (message: string) => {
                 'Content-Type': 'application/json',  // Setting the content type
             },
         })
-
-        console.log("Response:", response.data);
+        // console.log("Response:", response.data);
         return response.data
     } catch (error: any) {
          console.error("Error:", error.response ? error.response.data : error.message);
