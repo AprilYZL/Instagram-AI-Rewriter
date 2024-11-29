@@ -8,7 +8,7 @@ const fetchData = async (message: string) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            timeout: 10000,
+            timeout: 60000,
         })
         // console.log("Response:", response.data);
         return response.data
