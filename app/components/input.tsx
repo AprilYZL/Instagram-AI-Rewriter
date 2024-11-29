@@ -30,6 +30,7 @@ const Input = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setError("")
+        setMessage("")
         setLoading(true)
         if (message.trim() === '') return
         try {
