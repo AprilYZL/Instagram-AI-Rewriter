@@ -1,5 +1,5 @@
 import axios from "axios"
-const fetchData = async (message: any) => {
+const fetchData = async (message: string) => {
     const payload = {
         url: message
     }
