@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Loading from './loading'
+import Toggle from './toggle'
 import fetchData from '../services/fetchData'
 
 // const fakeData = {
@@ -12,6 +13,7 @@ import fetchData from '../services/fetchData'
 const Input = () => {
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
+    const [isToggled, setIsToggled] = useState(false)
     const [data, setData] = useState("")
     const [error, setError] = useState("")
 
@@ -27,13 +29,14 @@ const Input = () => {
     
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+        setError("")
         setLoading(true)
         if (message.trim() === '') return
         try {
             const responseClient = await fetchData(message)
             // const responseClient = fakeData
             setData(responseClient?.transcript)
-            downloadAsTxt(responseClient?.transcript)
+            if(isToggled)downloadAsTxt(responseClient?.transcript)
         } catch (error) {
             setError('An error occurred while fetching the data.')
         }
@@ -88,6 +91,12 @@ const Input = () => {
                 </div>
             </form>
             <div>
+                <Toggle 
+                enabledText="Download as txt"  
+                disabledText='Do not download'
+                isToggled={isToggled}
+                setIsToggled={setIsToggled}
+                />
                 <div className="max-w-4xl mx-auto mt-8">
                     {error && <div className="text-red-500">{error}</div>}
                     {loading ? (
