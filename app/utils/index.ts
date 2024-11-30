@@ -1,13 +1,13 @@
 //clean the mobile url
 export function cleanInstagramUrl(fullUrl: string) {
     try {
-      const url = new URL(fullUrl);
-      if (url.pathname.includes('/reel/')) {
-        const pathParts = url.pathname.split('/');
-        const reelId = pathParts[pathParts.indexOf('reel') + 1];
-        return `https://www.instagram.com/reel/${reelId}/`;
-      }
-      return null; 
+      // const url = new URL(fullUrl);
+      // if (url.pathname.includes('/reel/')) {
+      //   const pathParts = url.pathname.split('/');
+      //   const reelId = pathParts[pathParts.indexOf('reel') + 1];
+      //   return `https://www.instagram.com/reel/${reelId}/`;
+      // }
+      return fullUrl; 
     } catch (error) {
       console.error('Invalid URL:', error);
       return null;
@@ -24,6 +24,17 @@ export function cleanInstagramUrl(fullUrl: string) {
         a.click()
         URL.revokeObjectURL(url)
     }
+
+  //download the video file    
+    export function downloadAsMP4 (data: string) {
+      const blob = new Blob([data], {  type: 'video/mp4' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = 'AIVideo.mp4'
+      a.click()
+      URL.revokeObjectURL(url)
+  }
 
     //paste the url from the clipboard
     export const handlePaste = async (setMessage: (value: string) => void, setError: (value: string) => void) => {

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Loading from './loading'
 import { getVideoStatus } from '../services/generateVideo'
+import { downloadAsMP4 } from '../utils'
 
 const VideoComponent = ({videoId}: {videoId: string}) => {
 
@@ -18,7 +19,7 @@ const VideoComponent = ({videoId}: {videoId: string}) => {
         console.log("videoStatus:", response)
         if (response.state === 'COMPLETE') {
           setData(response.url)
-          console.log("videoUrl:", response)
+          downloadAsMP4(response.url)
           clearInterval(intervalId)
         }
       } catch (err: any) {
