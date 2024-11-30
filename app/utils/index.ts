@@ -25,6 +25,21 @@ export function cleanInstagramUrl(fullUrl: string) {
         URL.revokeObjectURL(url)
     }
 
+    //paste the url from the clipboard
+    export const handlePaste = async (setMessage: (value: string) => void, setError: (value: string) => void) => {
+        if (typeof navigator !== 'undefined' && navigator.clipboard) {
+            try {
+                const text = await navigator.clipboard.readText()
+                setMessage(text)
+            } catch (err) {
+                console.error('Failed to read clipboard contents: ', err)
+                setError('Failed to access clipboard.')
+            }
+        } else {
+            alert('Clipboard not supported in this browser.')
+        }
+    }
+
 
     //fake testing data
    export const testScribedData = {
