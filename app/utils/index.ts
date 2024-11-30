@@ -1,16 +1,16 @@
 //clean the mobile url
 export function cleanInstagramUrl(fullUrl: string) {
     try {
-      // const url = new URL(fullUrl);
+      // const url = new URL(fullUrl)
       // if (url.pathname.includes('/reel/')) {
-      //   const pathParts = url.pathname.split('/');
-      //   const reelId = pathParts[pathParts.indexOf('reel') + 1];
-      //   return `https://www.instagram.com/reel/${reelId}/`;
+      //   const pathParts = url.pathname.split('/')
+      //   const reelId = pathParts[pathParts.indexOf('reel') + 1]
+      //   return `https://www.instagram.com/reel/${reelId}/`
       // }
-      return fullUrl; 
+      return fullUrl
     } catch (error) {
-      console.error('Invalid URL:', error);
-      return null;
+      console.error('Invalid URL:', error)
+      return null
     }
   }
 
@@ -37,19 +37,24 @@ export function cleanInstagramUrl(fullUrl: string) {
   }
 
     //paste the url from the clipboard
-    export const handlePaste = async (setMessage: (value: string) => void, setError: (value: string) => void) => {
-        if (typeof navigator !== 'undefined' && navigator.clipboard) {
-            try {
-                const text = await navigator.clipboard.readText()
-                setMessage(text)
-            } catch (err) {
-                console.error('Failed to read clipboard contents: ', err)
-                setError('Failed to access clipboard.')
+    export const handlePaste = async (setMessage: (value: string) => void, setError: (value: string) => void, inputRef: React.RefObject<HTMLInputElement>) => {
+      if (typeof navigator !== 'undefined' && navigator.clipboard) {
+        try {
+            const text = await navigator.clipboard.readText()
+            setMessage(text)
+            if (inputRef.current) {
+                inputRef.current.value = text
+                inputRef.current.setSelectionRange(text.length, text.length)
+                inputRef.current.focus()
             }
-        } else {
-            alert('Clipboard not supported in this browser.')
+        } catch (err) {
+            console.error('Failed to read clipboard contents: ', err)
+            setError('Failed to access clipboard.')
         }
+    } else {
+        alert('Clipboard not supported in this browser.')
     }
+}
 
 
     //fake testing data

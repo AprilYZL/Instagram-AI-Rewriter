@@ -10,7 +10,7 @@ export async function POST(request: Request) {
       {
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': 'b42fb0e9-ab37-457e-b83c-d847bee55480'
+          'x-api-key': process.env.PRIVATE_API_KEY
         },
         timeout: 60000,
       }

@@ -1,17 +1,17 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://127.0.0.1:5328/:path*', // Proxy to Backend
+        destination: 'http://127.0.0.1:5328/:path*', 
       },
     ]
   },
   eslint: {
-    ignoreDuringBuilds: true, // This will prevent ESLint from running during the build process.
+    ignoreDuringBuilds: true, 
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig

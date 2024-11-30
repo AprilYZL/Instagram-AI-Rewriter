@@ -8,6 +8,12 @@ export default function Description() {
             <p className="text-sm sm:text-base text-gray-400 mb-6 text-left">
                 Ideal for creators, marketers, and influencers aiming for precision and creativity in their content.
             </p>
+            <p className="text-sm sm:text-base text-gray-400 mb-6 text-left whitespace-pre-line">
+            Please ensure the URL follows this format: https://www.instagram.com/reel/shortcode
+            </p>
+            <p className="text-sm sm:text-base text-gray-400 mb-6 text-left whitespace-pre-line">
+                For example: https://www.instagram.com/reel/xyz12345/
+            </p>
         </>
     )
 }

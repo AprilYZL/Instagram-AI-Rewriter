@@ -1,19 +1,20 @@
 'use client'
-
 import { useState, useEffect } from 'react'
 import Loading from '../components/loading'
 import Toggle from '../components/toggle'
 import VideoComponent from '../components/video'
-import fetchData from '../services/fetchData'
+import fetchData from '../services/fetch-transcribed-script'
 import Input from '../components/input'
 import DisplaySection from '../components/display'
+import RadioButton from '../components/radio'
 import { cleanInstagramUrl, downloadAsTxt } from '../utils/index'
-import { generateVideo } from '../services/generateVideo'
+import { generateVideo } from '../services/generate-ai-video'
 
 const AIGenerator = () => {
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
     const [isToggled, setIsToggled] = useState(false)
+    const [selectedModel, setSelectedModel] = useState('chatgpt')
     const [transcribedData, setTranscribedData] = useState("")
     const [rewrittenData, setRewrittenData] = useState("")
     const [error, setError] = useState("")
@@ -48,13 +49,12 @@ const AIGenerator = () => {
         if (message.trim() === '') return
         const cleanedUrl = cleanInstagramUrl(message)
         if (!cleanedUrl) {
-            setError('Invalid Instagram reel URL');
+            setError('Invalid Instagram reel URL')
             setLoading(false)
             return
         }
         try {
             const responseClient = await fetchData(cleanedUrl)
-            //const responseClient = fakeData
             setTranscribedData(responseClient?.transcript)
             setRewrittenData(responseClient?.rewritten_transcript)
             if (isToggled) downloadAsTxt(responseClient?.transcript)
@@ -80,7 +80,7 @@ const AIGenerator = () => {
                     isToggled={isToggled}
                     setIsToggled={setIsToggled}
                 />
-
+                <RadioButton setSelectedModel={setSelectedModel} selectedModel={selectedModel}/>
                 {error && <div className="text-red-500">{error}</div>}
                 {loading ? (
                     <Loading />

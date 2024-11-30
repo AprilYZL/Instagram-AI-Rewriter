@@ -4,7 +4,7 @@ import axios from 'axios'
 export async function POST(request: Request) {
   const { id } = await request.json()
   const headers = {
-    'x-api-key': 'b42fb0e9-ab37-457e-b83c-d847bee55480',
+    'x-api-key': process.env.PRIVATE_API_KEY,
     'x-operation-id': id,
     'Content-Type': 'application/json',
   }

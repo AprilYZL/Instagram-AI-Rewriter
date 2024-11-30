@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.9",
     "axios": "^1.7.8",
     "next": "15.0.3",
     "node": "^20.18.1",

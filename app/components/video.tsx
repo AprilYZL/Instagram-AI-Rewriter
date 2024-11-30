@@ -1,40 +1,39 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 import Loading from './loading'
-import { getVideoStatus } from '../services/generateVideo'
+import { getVideoStatus } from '../services/generate-ai-video'
 import { downloadAsMP4 } from '../utils'
 
 const VideoComponent = ({videoId}: {videoId: string}) => {
 
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+  const [data, setData] = useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    let intervalId: NodeJS.Timeout;
+    let intervalId: NodeJS.Timeout
 
     const fetchData = async () => {
       try {
         const response = await getVideoStatus({id: videoId})
-        console.log("videoStatus:", response)
         if (response.state === 'COMPLETE') {
           setData(response.url)
           downloadAsMP4(response.url)
           clearInterval(intervalId)
         }
       } catch (err: any) {
-        setError(err.message);
+        setError(err.message)
       } 
-    };
-    intervalId = setInterval(fetchData, 30000);
-    fetchData();
-    return () => clearInterval(intervalId);
-  }, []);
+    }
+    intervalId = setInterval(fetchData, 30000)
+    fetchData()
+    return () => clearInterval(intervalId)
+  }, [])
 
 
-  let content;
+  let content
   if (error) {
-    content = <p>Error: {error}</p>;
+    content = <p>Error: {error}</p>
   } else if (data) {
     content = (
       <div className="max-w-[600px] h-auto mx-auto">
@@ -43,12 +42,12 @@ const VideoComponent = ({videoId}: {videoId: string}) => {
           Your browser does not support the video tag.
         </video>
       </div>
-    );
+    )
   } else {
-    content = <Loading loadingText="Please wait up to 5 minutes while the AI generates your video—it will appear below shortly!" />;
+    content = <Loading loadingText="Please wait up to 5 minutes while the AI generates your video—it will appear below shortly!" />
   }
 
-  return <>{content}</>;
-};
+  return <>{content}</>
+}
 
-export default VideoComponent;
+export default VideoComponent

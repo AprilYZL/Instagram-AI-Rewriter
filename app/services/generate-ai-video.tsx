@@ -7,8 +7,7 @@ import axios from "axios"
     }
     try {
         const response = await axios.post("/api/generate-video", payload)
-        console.log("generateVideo:", response.data);
-        return response.data
+        console.log("generateVideo:", response.data)
         return response.data
     } catch (error: any) {
         if (error.response?.data?.error) {
@@ -21,7 +20,6 @@ import axios from "axios"
 export const getVideoStatus = async ({id}: {id: string}) => {
     try {
         const response = await axios.post("/api/get-video-status", { id })
-        console.log("getVideoStatus:", response.data);
         return response.data
     } catch (error: any) {
         if (error.response?.data?.error) {
