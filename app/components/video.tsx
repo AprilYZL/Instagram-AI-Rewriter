@@ -7,7 +7,6 @@ import { getVideoStatus } from '../services/generateVideo'
 const VideoComponent = ({videoId}: {videoId: string}) => {
 
   const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -20,15 +19,11 @@ const VideoComponent = ({videoId}: {videoId: string}) => {
         if (response.state === 'COMPLETE') {
           setData(response.url)
           console.log("videoUrl:", response)
-          setIsLoading(false)
           clearInterval(intervalId)
         }
       } catch (err: any) {
-        setIsLoading(false)
         setError(err.message);
-      } finally {
-        setIsLoading(false);
-      }
+      } 
     };
     intervalId = setInterval(fetchData, 30000);
     fetchData();
