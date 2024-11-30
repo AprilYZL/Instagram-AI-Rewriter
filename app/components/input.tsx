@@ -5,8 +5,8 @@ import Loading from './loading'
 import Toggle from './toggle'
 import VideoComponent from './video'
 import fetchData from '../services/fetchData'
-import { cleanInstagramUrl } from '../utils'
-import { generateVideo, getVideoStatus } from '../services/generateVideo'
+import { cleanInstagramUrl } from '../utils/index'
+import { generateVideo } from '../services/generateVideo'
 
 const fakeData = {
     "transcript": "If you're looking for a new couch, especially with Black Friday coming up, you absolutely need to check out United Canada. Their range is made in Canada and let me tell you, the quality speaks for itself. I have never felt more comfortable sofas in my life, plus the turnaround times quicker thanks to the local production. But wait, there's more. The warranty is 25 years. Tell me that's not the best deal you've come across. Every piece is highly customizable from the configuration, the material and the color and made with top quality materials. They're authorized retailers for renowned Canadian manufacturers that have been around for over decades like Palisader, Decorest and Marshall. They're open every day of the week with interiors designers in store to consult with. They currently have incredible Black Friday offers on. You could get this so far for your home for just $85 a month, so visit them in Richmond Hill in store or online.",
@@ -24,9 +24,8 @@ const Input = () => {
     const [error, setError] = useState("")
     const [videoId, setVideoId] = useState("")
     const [videoStatus, setVideoStatus] = useState("")
-    const [videoUrl, setVideoUrl] = useState("")
 
-    console.log(videoUrl, videoStatus)
+    console.log(videoStatus)
     const handleVideoGeneration = async () => {
         setError("")
         if (rewrittenData.trim() === '') return
@@ -56,9 +55,14 @@ const Input = () => {
         setError("")
         setMessage("")
         setLoading(true)
+        setVideoId("")
         if (message.trim() === '') return
         const cleanedUrl = cleanInstagramUrl(message)
-        if (!cleanedUrl) { setError('Invalid Instagram reel URL'); return }
+        console.log(cleanedUrl)
+        if (!cleanedUrl) { 
+            setError('Invalid Instagram reel URL');
+            setLoading(false)
+            return }
         try {
             const responseClient = await fetchData(cleanedUrl)
             //const responseClient = fakeData

@@ -7,7 +7,7 @@ import { getVideoStatus } from '../services/generateVideo'
 const VideoComponent = ({videoId}: {videoId: string}) => {
 
   const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -15,14 +15,16 @@ const VideoComponent = ({videoId}: {videoId: string}) => {
 
     const fetchData = async () => {
       try {
-        setIsLoading(true);
         const response = await getVideoStatus({id: videoId})
         console.log("videoStatus:", response)
-        if (response?.url) {
+        if (response.state === 'COMPLETE') {
           setData(response.url)
+          console.log("videoUrl:", response)
+          setIsLoading(false)
           clearInterval(intervalId)
         }
       } catch (err: any) {
+        setIsLoading(false)
         setError(err.message);
       } finally {
         setIsLoading(false);
@@ -33,17 +35,24 @@ const VideoComponent = ({videoId}: {videoId: string}) => {
     return () => clearInterval(intervalId);
   }, []);
 
-  if (!isLoading) return <Loading />;
-  if (error) return <p>Error: {error}</p>;
-  if (data) return (
-    <div className="max-w-[600px] h-auto mx-auto">
-      <video width="100%" height="auto" controls>
-        <source src={data} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
-  )
-  return <p>Waiting for data...</p>;
+
+  let content;
+  if (error) {
+    content = <p>Error: {error}</p>;
+  } else if (data) {
+    content = (
+      <div className="max-w-[600px] h-auto mx-auto">
+        <video width="100%" height="auto" controls>
+          <source src={data} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    );
+  } else {
+    content = <Loading />;
+  }
+
+  return <>{content}</>;
 };
 
 export default VideoComponent;
