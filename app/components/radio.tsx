@@ -12,10 +12,9 @@ export default function RadioButton({ setSelectedModel, selectedModel }: { setSe
           type="radio"
           name="model"
           value="chatgpt"
-          defaultChecked
           checked={selectedModel === 'chatgpt'}
           onChange={handleModelChange}
-         className="peer hidden"
+          className="peer hidden"
         />
          <div className="w-6 h-6 !ml-0 border-2 border-gray-500 rounded-full peer-checked:bg-gray-100 peer-checked:border-gray-100 cursor-pointer"></div>
         <span>ChatGPT</span>
@@ -27,7 +26,7 @@ export default function RadioButton({ setSelectedModel, selectedModel }: { setSe
           value="gemini"
           onChange={handleModelChange}
           checked={selectedModel === 'gemini'}
-         className="peer hidden"
+          className="peer hidden"
         />
          <div className="w-6 h-6 border-2 border-gray-500 rounded-full peer-checked:bg-gray-100 peer-checked:border-gray-100 cursor-pointer"></div>
         <span>Gemini</span>
