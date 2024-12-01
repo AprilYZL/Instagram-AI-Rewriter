@@ -61,9 +61,9 @@ const AIGenerator = () => {
 
         } catch (error) {
             setError('An error occurred while fetching the data.')
-        }
+        } finally {
         setLoading(false)
-
+        }
     }
 
     if (!isMounted) {
