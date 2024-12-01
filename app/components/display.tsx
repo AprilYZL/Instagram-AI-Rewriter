@@ -30,13 +30,13 @@ const DisplaySection = ({
    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {transcribedData && (
             <div className="text-white border p-4 rounded bg-gray-800">
-                <h3 className="font-bold mb-2">Transcribed Data</h3>
+                <h3 className="font-bold mb-2">Transcribed Script</h3>
                 <p>{transcribedData}</p>
             </div>
         )}
         {rewrittenData !== undefined && rewrittenData?.length > 0 && (
             <div className="text-white border p-4 rounded bg-gray-800">
-                <h3 className="font-bold mb-2">Rewritten Data</h3>
+                <h3 className="font-bold mb-2">Rewritten Script</h3>
                 <textarea
                     className="w-full h-80 p-2 bg-gray-700 text-white rounded resize-none"
                     value={rewrittenData}
