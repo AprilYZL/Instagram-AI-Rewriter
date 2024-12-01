@@ -12,7 +12,7 @@ export default function Description() {
             Please ensure the URL follows this format: https://www.instagram.com/reel/shortcode
             </p>
             <p className="text-sm sm:text-base text-gray-400 mb-6 text-left whitespace-pre-line">
-                For example: https://www.instagram.com/reel/xyz12345/
+                For example: https://www.instagram.com/reel/xyz12345
             </p>
         </>
     )
