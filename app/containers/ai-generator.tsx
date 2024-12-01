@@ -46,7 +46,11 @@ const AIGenerator = () => {
         setMessage("")
         setLoading(true)
         setVideoId("")
-        if (message.trim() === '') return
+        if (message.trim() === '') {
+            setLoading(false)
+            setError("Please enter a valid URL")
+            return
+        }
         const cleanedUrl = cleanInstagramUrl(message)
         if (!cleanedUrl) {
             setError('Invalid Instagram reel URL')
@@ -81,7 +85,7 @@ const AIGenerator = () => {
                     setIsToggled={setIsToggled}
                 />
                 <RadioButton setSelectedModel={setSelectedModel} selectedModel={selectedModel}/>
-                {error && <div className="text-red-500">{error}</div>}
+                {error && <div className="text-red-500 mt-10">{error}</div>}
                 {loading ? (
                     <Loading />
                 ) : (
