@@ -61,7 +61,7 @@ const AIGenerator = () => {
             const responseClient = await fetchData(cleanedUrl, selectedModel)
             setTranscribedData(responseClient?.transcript)
             setRewrittenData(responseClient?.rewritten_transcript)
-            if (isToggled) downloadAsTxt(responseClient?.transcript)
+            if (isToggled) downloadAsTxt(responseClient?.rewritten_transcript)
 
         } catch (error) {
             setError('An error occurred while fetching the data.')
